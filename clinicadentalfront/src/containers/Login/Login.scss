@@ -1,0 +1,31 @@
+@mixin reset-input-button($bg-color, $hover-bg-color) {
+    all: unset;
+    padding: 0.8em;
+    border-radius: 0.7em;
+    border: 1px solid black;
+    background: $bg-color;
+    transition: all 1s;
+    &:hover {
+        background: $hover-bg-color;
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2em;
+    min-height: 40vh;
+    max-width: 80vw;
+    input {
+        @include reset-input-button(rgb(200, 255, 241), rgb(152, 252, 255));
+    }
+    button {
+        @include reset-input-button(rgb(18, 247, 255), rgb(0, 197, 204));
+        cursor: pointer;
+    }
+     ::placeholder {
+        color: black;
+    }
+}
