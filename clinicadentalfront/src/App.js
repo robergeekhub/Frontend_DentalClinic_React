@@ -7,9 +7,21 @@ import Header from './Components/Header/Header'
 import Login from './Containers/Login/Login'
 import axios from 'axios';
 import Register from './Containers/Register/Register';
+import Profile from './Containers/Profile/Profile';
+import NewAppointment from './Containers/NewAppointment/NewAppointment';
+import ShowAppointments from './Containers/ShowAppointments/ShowAppointments';
+
 
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  let initialUser = null;
+  try {
+    initialUser = JSON.parse(localStorage.getItem('user'));
+  } catch (error) {
+    console.error(error)
+  }
+  const [user, setUser] = useState(initialUser);
+
+ 
   useEffect(() => {
     const token = localStorage.getItem('authToken')
     axios.get(process.env.REACT_APP_BASE_URL + '/users/profile',
@@ -21,15 +33,20 @@ function App() {
       .then(res => {
         setUser(res.data)
       })
-  }, [])
+  }, []) 
 
   return (
     <BrowserRouter>
     <Header />
     <Switch>
-      <Route path='/' component={Home} exact/>
-      <Route path='/login' exact ><Login setUser={setUser} /></Route>
-      <Route path='/register' component={Register} exact />
+        <Route path='/' component={Home} exact />
+        <Route path='/login' exact>
+          <Login user={user} setUser={setUser} />
+        </Route>
+        <Route path='/register' component={Register} exact />
+        <Route path='/profile' component={Profile} exact />
+        <Route path='/profile/newappointment' component={NewAppointment} exact />
+        <Route path='/profile/showappointments' component={ShowAppointments} />
     </Switch>
     <Footer />
   </BrowserRouter>

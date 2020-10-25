@@ -12,21 +12,24 @@ const Login = ({setUser}) => {
         };
         axios.post('http://localhost:5000/users/login',user)
         .then(res=>{
+            console.log(res.data)
             setUser(res.data.user) //seteo el user como estado del App.js
-            localStorage.setItem('authToken',res.data.token);
+            localStorage.setItem('authToken',JSON.stringify(res.data.token));
             localStorage.setItem('user',JSON.stringify(res.data.user))
             setTimeout(() => {
-                history.push('/')
+                history.push('/profile')
             }, 1000);
         })
         .catch(error=>console.log(error))
     }
     return (
+        
         <form className="login-form" onSubmit={handleSubmit}>
             <input type="email" name="email" required placeholder="Introduce tu email" />
             <input type="password" name="password" required placeholder="Introduce tu contraseña"/>
             <button type="submit">Log in</button>
         </form>
+        
     )
 }
 

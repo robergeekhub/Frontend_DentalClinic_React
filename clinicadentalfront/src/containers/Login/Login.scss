@@ -1,8 +1,8 @@
 @mixin reset-input-button($bg-color, $hover-bg-color) {
     all: unset;
     padding: 0.8em;
-    border-radius: 0.7em;
-    border: 1px solid black;
+    border-radius: 0.9em;
+    border: 3px solid black;
     background: $bg-color;
     transition: all 1s;
     &:hover {
