@@ -23,7 +23,6 @@ const Login = ({setUser}) => {
         .catch(error=>console.log(error))
     }
     return (
-        
         <form className="login-form" onSubmit={handleSubmit}>
             <input type="email" name="email" required placeholder="Enter your email" />
             <input type="password" name="password" required placeholder="Enter your password"/>
