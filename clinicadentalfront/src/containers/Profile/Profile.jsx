@@ -10,10 +10,11 @@ const Profile = () => {
     const history = useHistory();
 
 
-    const salir = () => {
+    const salir = async() => {
         localStorage.clear();
-        //localStorage.removeItem('token');
-        history.push('/');
+        await axios.put('http://localhost:5000/users/logout/'+ userLogin.email)
+        await history.push('/');
+       
     }
 
     /*  const validator = JSON.parse(localStorage.getItem('user'));
@@ -49,8 +50,6 @@ const Profile = () => {
                 <Link to="/profile/newAppointment">Nueva cita</Link>
                 <div></div>
                 <Link to="/profile/showAppointments">Mostrar cita</Link>
-                <div></div>
-                <Link to="/profile/deleteAppointment">Eliminar cita</Link>
             </div>
         </body>
 

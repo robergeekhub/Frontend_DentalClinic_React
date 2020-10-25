@@ -17,10 +17,8 @@ const tailLayout = {
 };
 const Register = () => {
     const onFinish = (user) => {
-        // Vale, en axios el body se le pasa directo por parametro al hacer el POST, ayer
-        // me estube pegando con como hacerlo con un GET y es imposible, de ahi me he rallado yo
         
-        axios.post('http://localhost:5001/users/registration', user)
+        axios.post('http://localhost:5000/users/registration', user)
             .then(res => {
                 console.log(res.data)
                 notification.success({ message :'Usuario registrado',description:'Usuario registrado con éxito'})
@@ -45,7 +43,7 @@ const Register = () => {
         >
 
             <Form.Item
-                label="Nombre"
+                label="Name"
                 name="username"
                 rules={[
                     {
@@ -74,7 +72,7 @@ const Register = () => {
             </Form.Item>
 
             <Form.Item
-                label="Contraseña"
+                label="Password"
                 name="password"
                 rules={[
                     {

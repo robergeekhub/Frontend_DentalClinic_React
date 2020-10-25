@@ -9,7 +9,7 @@ const NewAppointment = () => {
             date: event.target.date.value,
             status: event.target.status.value
         };
-        axios.post('http://localhost:5001/appointments/newAppointment/'+ validator.email, appointment)
+        axios.post('http://localhost:5000/appointments/newAppointment/'+ validator.email, appointment)
             .then(res => {
                 console.log(res)
             })
@@ -17,13 +17,15 @@ const NewAppointment = () => {
     }
 
     return (
+      <body>
         <div>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <input type="text" name="date" required placeholder="Introduce una fecha"/>
-                <input type="text" name="status" required placeholder="Motivo de la cita"/>
-                <button type="submit">Crear cita</button>
-            </form>            
+          <form className="login-form" onSubmit={handleSubmit}>
+              <input type="text" name="date" required placeholder="Enter a date"/>
+              <input type="text" name="status" required placeholder="Reason for the appointment"/>
+              <button type="submit">Create appointment</button>
+          </form>            
         </div>
+      </body>
     )
 }
 

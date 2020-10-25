@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, useHistory } from 'react-router-dom';
+import { BrowserRouter,Link,Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -9,37 +9,65 @@ const ShowAppointments = () => {
 
     const history = useHistory();
 
-    
+
     const salir = () => {
         localStorage.clear();
         history.push('/');
     }
 
-    useEffect(() => {
-
-        axios.get('http://localhost:5000/appointments/view/'+ validator.token)
-        .then( (res) => {
-            console.log(res.data.appointment);
+    const estadoCitas = (token) => {
+        return axios.get('http://localhost:5000/appointments/view/'+ token)
+        .then((res) => {
             setCitas(res.data.appointment);
-
-			
-		}).catch( (err) => {
-			console.log( err );
+            return res;
+        }).catch((err) => {
+            console.log (err);
         });
+    }
 
-    },[]);
+    useEffect(async() => {
+
+        /* axios.get('http://localhost:3004/appointments/getAppointments/' + validator.token)
+            .then((res) => {
+                console.log(res.data.appointment);
+                setCitas(res.data.appointment);
+                localStorage.setItem("Citas", JSON.stringify(res.data));
+            }).catch((err) => {
+                console.log(err);
+            }); */
+
+        await estadoCitas(validator.token)
+            
+
+    }, []);
+
+
+
+    const localizaConcretamente = async (cita) => {
+        //console.log(cita.title);
+        //let storage = JSON.parse(localStorage.getItem("Citas"));
+
+        await axios.delete('http://localhost:5000/appointments/cancel/'+ cita);
+        await estadoCitas(validator.token)
+
+        console.log(cita);
+
+    }
 
     return (
-        <BrowserRouter>
+        <div>
             <header>
                 <button onClick={salir}>Salir</button>
             </header>
-            
-           <div>
-                {datosCitas?.map(cita => <div className="cardCita" key={cita._id}>{cita.status}</div>)}
+
+            <div>
+                {/* {datosCitas?.map(cita => <div className="cardCita" key={cita._id} onClick={() => localizaConcretamente(cita)}>{cita.observations}<button>boton</button></div>)} */}
+                {datosCitas?.map(cita => <div className="tarjetaCitas" key={cita._id}>{cita.date}  {cita.status}<button onClick={() => localizaConcretamente(cita._id)}>Borrar</button></div>)}
             </div>
-            
-        </BrowserRouter>
+        <div>
+            <Link to="/profile">Volver</Link>
+        </div>
+        </div>
     )
 }
 

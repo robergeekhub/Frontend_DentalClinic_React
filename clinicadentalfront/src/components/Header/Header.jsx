@@ -10,7 +10,11 @@ const Header = ({user,setUser}) => {
         setUser(null)
     }
     return (
+        
         <header className="header">
+            <div class="logo">
+                <img src="dental.png" width="30%" height="30%" ></img>
+            </div>
             <Link to="/">Home</Link>
             {user ?
                 <div className="loggedIn">
@@ -21,7 +25,7 @@ const Header = ({user,setUser}) => {
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>
                 </div>}
-
+                
         </header>
     )
 }
