@@ -25,8 +25,8 @@ const Login = ({setUser}) => {
     return (
         
         <form className="login-form" onSubmit={handleSubmit}>
-            <input type="email" name="email" required placeholder="Introduce tu email" />
-            <input type="password" name="password" required placeholder="Introduce tu contraseña"/>
+            <input type="email" name="email" required placeholder="Enter your email" />
+            <input type="password" name="password" required placeholder="Enter your password"/>
             <button type="submit">Log in</button>
         </form>
         

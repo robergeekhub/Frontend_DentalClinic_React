@@ -17,7 +17,7 @@ const ShowAppointments = () => {
 
     useEffect(() => {
 
-        axios.get('http://localhost:5000/appointments/getAppointments/'+ validator.token)
+        axios.get('http://localhost:5000/appointments/view/'+ validator.token)
         .then( (res) => {
             console.log(res.data.appointment);
             setCitas(res.data.appointment);
