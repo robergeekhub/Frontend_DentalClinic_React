@@ -21,10 +21,10 @@ const Register = () => {
         axios.post('http://localhost:5000/users/registration', user)
             .then(res => {
                 console.log(res.data)
-                notification.success({ message :'Usuario registrado',description:'Usuario registrado con éxito'})
+                notification.success({ message :'registered user',description:'Registered user successfully'})
             }).catch(error => {
                 console.log(error)
-                notification.error({ message: 'Error en el registro', description: 'Hubo un error al tratar de registrar al usuario, revisa tus campos' })
+                notification.error({ message: 'Registry error', description: 'There was an error trying to register the user, check your fields' })
             })
     };
 
@@ -48,7 +48,7 @@ const Register = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Por favor introduzca su nombre!',
+                        message: 'Please enter your name!',
                     },
                 ]}
             >
@@ -60,11 +60,11 @@ const Register = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Por favor introduzca su email!',
+                        message: 'Please enter your email!',
                     },
                     {
                         type:'email',
-                        message: 'El campo debe ser un email',
+                        message: 'The field must be an email',
                     }
                 ]}
             >
@@ -77,11 +77,11 @@ const Register = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Por favor introduzca su contraseña!',
+                        message: 'Please enter your password!',
                     },
                     {
                         pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/, 
-                        message: 'Su contraseña debe contener al menos una minúscula, una mayúscula, un número,un carácter especial, y debe estar entre 8 y 10 carácteres de longitud!',
+                        message: 'Your password must contain at least one lower case, one upper case, one number, one special character, and must be between 8 and 10 characters in length!',
                     }
                 ]}
             >
