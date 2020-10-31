@@ -25,7 +25,7 @@ const ShowAppointments = () => {
         });
     }
 
-    useEffect(async() => {
+    useEffect(() => {   
 
         /* axios.get('http://localhost:3004/appointments/getAppointments/' + validator.token)
             .then((res) => {
@@ -36,7 +36,10 @@ const ShowAppointments = () => {
                 console.log(err);
             }); */
 
-        await estadoCitas(validator.token)
+            const getCitas = async () => {
+                await estadoCitas(validator.token)
+              }
+              getCitas()
             
 
     }, []);

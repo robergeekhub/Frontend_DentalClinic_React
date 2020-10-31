@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 const NewAppointment = () => {
     const validator = JSON.parse(localStorage.getItem('user'));
@@ -19,12 +20,12 @@ const NewAppointment = () => {
     return (
       <body>
         <div>
-        <img src="Appointment.jpg" width="100%" height="100%"></img></div>
-        <div>
           <form className="login-form" onSubmit={handleSubmit}>
               <input type="text" name="date" required placeholder="Enter a date"/>
               <input type="text" name="status" required placeholder="Reason for the appointment"/>
               <button type="submit">Create appointment</button>
+              <Link to='/Profile'>Back</Link>
+
           </form>            
         </div>
       </body>

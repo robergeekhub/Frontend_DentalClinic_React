@@ -44,12 +44,12 @@ const Profile = () => {
     return (
         <body>
             <header>
-                <button onClick={salir}>Salir</button>
+                <button onClick={salir}>Exit</button>
             </header>
             <div>
-                <Link to="/profile/newAppointment">Nueva cita</Link>
+                <Link to="/profile/newAppointment">New Appointment</Link>
                 <div></div>
-                <Link to="/profile/showAppointments">Mostrar cita</Link>
+                <Link to="/profile/showAppointments">Show appointment</Link>
             </div>
         </body>
 

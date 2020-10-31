@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom'
 import './Login.scss';
+import 'antd/dist/antd.css';
+
+
 const Login = ({setUser}) => {
     const history = useHistory();
     const handleSubmit = event =>{
@@ -26,7 +29,7 @@ const Login = ({setUser}) => {
         <form className="login-form" onSubmit={handleSubmit}>
             <input type="email" name="email" required placeholder="Enter your email" />
             <input type="password" name="password" required placeholder="Enter your password"/>
-            <button type="submit">Log in</button>
+            <button type="submit">Login</button>
         </form>
         
     )
