@@ -1,6 +1,5 @@
 <h1 align="center">clinicaDental (dentalClinic)</h1>
 
-<<<<<<< HEAD
 📢 Frontend of a dating APP for a dental clinic
 =======
 📢 Frontend of a dating APP for a dental clinic that allows user registration, login and logout of the application also allows you to create an appointment, delete the appointment and see pending appointments.
@@ -24,5 +23,4 @@ allows you to create a dentist appointment, delete the appointment or view all p
 <br>![clinica](https://user-images.githubusercontent.com/70948045/97120784-f3fd0a00-1719-11eb-8a15-0dff02b871a4.gif) </br>
 
 link to heroku: http://clinicadentalfront.herokuapp.com/
- 
->>>>>>> e87cdb7e73f7159f1c53a467ae03bf876754174b
+
