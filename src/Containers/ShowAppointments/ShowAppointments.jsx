@@ -60,7 +60,7 @@ const ShowAppointments = () => {
     return (
         <div>
             <header>
-                <button onClick={salir}>Salir</button>
+                <button onClick = {salir}>Salir</button>
             </header>
 
             <div>
