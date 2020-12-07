@@ -16,7 +16,7 @@ const ShowAppointments = () => {
     }
 
     const estadoCitas = (token) => {
-        return axios.get('http://localhost:5000/appointments/view/'+ token)
+        return axios.get('http://localhost:8000/appointments/view/'+ token)
         .then((res) => {
             setCitas(res.data.appointment);
             return res;

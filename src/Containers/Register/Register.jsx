@@ -1,12 +1,16 @@
 import React from 'react';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
+import './Register.scss';
+import 'antd/dist/antd.css';
+
+
 const layout = {
     labelCol: {
-        span: 98,
+        span: 90,
     },
     wrapperCol: {
-        span: 16,
+        span: 17,
     },
 };
 const tailLayout = {
@@ -18,7 +22,7 @@ const tailLayout = {
 const Register = () => {
     const onFinish = (user) => {
         
-        axios.post('http://localhost:5000/users/registration', user)
+        axios.post('http://localhost:8000/api/clients/register', user)
             .then(res => {
                 console.log(res.data)
                 notification.success({ message :'registered user',description:'Registered user successfully'})
@@ -44,7 +48,7 @@ const Register = () => {
 
             <Form.Item
                 label="Name"
-                name="username"
+                name="name"
                 rules={[
                     {
                         required: true,
@@ -90,7 +94,7 @@ const Register = () => {
 
             <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Register
         </Button>
             </Form.Item>
         </Form>

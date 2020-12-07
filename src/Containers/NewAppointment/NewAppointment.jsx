@@ -1,33 +1,57 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom';
 
 const NewAppointment = () => {
     const validator = JSON.parse(localStorage.getItem('user'));
     const handleSubmit = event => {
         event.preventDefault();
         const appointment = {
-            date: event.target.date.value,
-            status: event.target.status.value
+            tipo: event.target.tipo.value,
+            descripcion: event.target.descripcion.value,
+            precio: event.target.precio.value
         };
-        axios.post('http://localhost:5000/appointments/newAppointment/'+ validator.email, appointment)
+        axios.post('http://localhost:8000/api/appointment/store', appointment)
             .then(res => {
                 console.log(res)
             })
-           .catch(error => console.log(error.response.data))
+           .catch(error => console.log(error.response))
     }
 
-    return (
-      <body>
-        <div>
-          <form className="login-form" onSubmit={handleSubmit}>
-              <input type="text" name="date" required placeholder="Enter a date"/>
-              <input type="text" name="status" required placeholder="Reason for the appointment"/>
-              <button type="submit">Create appointment</button>
-              <Link to='/Profile'>Back</Link>
+    const history = useHistory();
 
+
+    const salir = async() => {
+      localStorage.clear();
+      await axios.put('http://localhost/clients/logout/'+ validator.email)
+      await history.push('/');
+  }
+
+    return (
+      <body className="body">
+
+        <div className="header">
+          <div className="buttons">
+				    <Link to='/profile'>Back</Link>
+          </div>
+          <div className="buttons">
+            <Link to onClick={salir}>Salir</Link>
+
+          </div>
+        </div>
+
+        <div className="containerFormLogin">
+          <form className="loginForm" onSubmit={handleSubmit}>
+          <input type="text" name="tipo" required placeholder="Introduce un tipo"/>
+          <input type="text" name="descripcion" required placeholder="Introduce una descripcion"/>
+          <input type="text" name="precio" required placeholder="Introduce un precio"/>
+          <select name="cliente" id="">
+            <option value="">Cliente</option>
+          </select>
+          <button type="submit">Crear cita</button>
           </form>            
         </div>
+        
       </body>
     )
 }

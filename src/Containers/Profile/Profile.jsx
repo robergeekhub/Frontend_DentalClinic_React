@@ -2,20 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { Link, BrowserRouter, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-//
+
 const Profile = () => {
     const userLogin = JSON.parse(localStorage.getItem('user'));
     //const [datosCitas, setCitas] = useState([]);
+    const compruebaToken = localStorage.getItem('token');
+
 
     const history = useHistory();
 
 
     const salir = async() => {
         localStorage.clear();
-        await axios.put('http://localhost:5000/users/logout/'+ userLogin.email)
+        await axios.put('http://localhost:8000/api/clients'+ userLogin.email)
         await history.push('/');
-       
     }
+
+    
+	
+	/*useEffect(() => {
+		axios.get('http://localhost:8000/api/clients/', {
+			headers: {
+				Authorization: "Bearer " + compruebaToken.replace(/\"/g, "")
+			}
+		})
+		.then(res => {
+			localStorage.setItem("clientes", JSON.stringify(res.data));
+		}).catch((err) => {
+			console.log(err)
+		});
+	}, [])
 
     /*  const validator = JSON.parse(localStorage.getItem('user'));
      //if (!validator) return <Redirect to='/' />
@@ -42,17 +58,23 @@ const Profile = () => {
     }  */
 
     return (
-        <body>
-            <header>
-                <button onClick={salir}>Exit</button>
-            </header>
-            <div>
-                <Link to="/profile/newAppointment">New Appointment</Link>
-                <div></div>
-                <Link to="/profile/showAppointments">Show appointment</Link>
+      <body className="body">
+        
+        <div className="header">
+            <div className="buttons">
+                <Link to onClick={salir}>Salir</Link>
             </div>
-        </body>
+        </div>
 
+        <div className="containerButtons">
+              <div className="buttonsProfile">
+                <Link to="/profile/newAppointment">Nueva cita</Link>
+              </div>
+              <div className="buttonsProfile">
+                <Link to="/profile/showAppointments">Mostrar citas</Link>
+              </div>
+        </div>
+      </body>
     )
 }
 
