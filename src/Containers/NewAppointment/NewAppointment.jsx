@@ -23,7 +23,7 @@ const NewAppointment = () => {
 
     const salir = async() => {
       localStorage.clear();
-      await axios.put('http://localhost/clients/logout/'+ validator.email)
+      await axios.put('http://localhost:8000/clients/logout/'+ validator.email)
       await history.push('/');
   }
 
