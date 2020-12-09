@@ -20,7 +20,8 @@ allows to register, login and logout in the web page <br>
 <h2>Appointments 📥 </h2>
 allows you to create a dentist appointment, delete the appointment or view all pending appointments<br>
 
-<br>![clinica](https://user-images.githubusercontent.com/70948045/97120784-f3fd0a00-1719-11eb-8a15-0dff02b871a4.gif) </br>
+<br>![xssx5xAcT0](https://user-images.githubusercontent.com/70948045/101674070-5014b700-3a58-11eb-9ff1-c5c173d264e3.gif)
+ </br>
 
 link to heroku: http://clinicadentalfront.herokuapp.com/
 
