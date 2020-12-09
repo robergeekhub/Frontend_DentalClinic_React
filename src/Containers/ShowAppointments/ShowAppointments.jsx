@@ -1,78 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter,Link,Switch, Route, useHistory } from 'react-router-dom';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios'
+import './ShowAppointments.scss';
+import {notification} from 'antd';
+import {Link} from 'react-router-dom';
 
+const Appointments = () =>{
+  const [appointments,setAppointments] = useState([]);
+  const token = localStorage.getItem('authToken')
+  useEffect(()=>{
+    const options = { headers: { Authorization: `Bearer ${token}` }};
+    axios.get('http://localhost:8000/api/appointments', options)
+    .then((res) =>{
+      console.log(res.data)
+      setAppointments(res.data);
+    }).catch((error) =>{
+      console.log(error);
+    })
+  },[])
 
-const ShowAppointments = () => {
-    const [datosCitas, setCitas] = useState([]);
-    const validator = JSON.parse(localStorage.getItem('user'));
-
-    const history = useHistory();
-
-
-    const salir = () => {
-        localStorage.clear();
-        history.push('/');
-    }
-
-    const estadoCitas = (token) => {
-        return axios.get('http://localhost:8000/appointments/view/'+ token)
-        .then((res) => {
-            setCitas(res.data.appointment);
-            return res;
-        }).catch((err) => {
-            console.log (err);
-        });
-    }
-
-    useEffect(() => {   
-
-        /* axios.get('http://localhost:3004/appointments/getAppointments/' + validator.token)
-            .then((res) => {
-                console.log(res.data.appointment);
-                setCitas(res.data.appointment);
-                localStorage.setItem("Citas", JSON.stringify(res.data));
-            }).catch((err) => {
-                console.log(err);
-            }); */
-
-            const getCitas = async () => {
-                await estadoCitas(validator.token)
-              }
-              getCitas()
-            
-
-    }, []);
-
-
-
-    const localizaConcretamente = async (cita) => {
-        //console.log(cita.title);
-        //let storage = JSON.parse(localStorage.getItem("Citas"));
-
-        await axios.delete('http://localhost:5000/appointments/cancel/'+ cita);
-        await estadoCitas(validator.token)
-
-        console.log(cita);
-
-    }
-
-    return (
-        <div>
-            <header>
-                <button onClick = {salir}>Salir</button>
-            </header>
-
-            <div>
-                {/* {datosCitas?.map(cita => <div className="cardCita" key={cita._id} onClick={() => localizaConcretamente(cita)}>{cita.observations}<button>boton</button></div>)} */}
-                {datosCitas?.map(cita => <div className="tarjetaCitas" key={cita._id}>{cita.date}  {cita.status}<button onClick={() => localizaConcretamente(cita._id)}>Borrar</button></div>)}
-            </div>
-        <div>
-            <Link to="/profile">Volver</Link>
+  const deleteAppointment = async (id) =>{
+    const options = { headers: { Authorization: `Bearer ${token}` }};
+    await axios.delete(process.env.REACT_APP_BASE_URL + '/appointment/cancel/' + id, options)
+    notification.success({message:'Appointment cancelled.', description:'Appointment has been successfully cancelled.'})
+    await axios.get(process.env.REACT_APP_BASE_URL + 'api/appointments', options)
+    .then((res) =>{
+      console.log(res.data)
+      setAppointments(res.data.appointment);
+    }).catch((error) =>{
+      console.log(error);
+    })
+  }
+  return (
+      <div className='appointmentprofile'>
+        <div className='appointmentContainer'>
+            {appointments?.map(appointment =>
+                <div key={appointment._id} className='infoAppointment'>
+                  <div className='inside'>{appointment.status}</div>
+                  <div className='inside'>{appointment.diagnosis}</div>
+                  <div className='inside'>{appointment.price}</div>
+                  <div className='buttondelete'><button className='deleteButton' onClick={()=> {deleteAppointment(appointment._id)}}>X</button></div>
+                </div>
+            )}
         </div>
+        <div className="justifybutton">        
+        <Link to='/profile' className='backbutton'>Back</Link>
         </div>
-    )
+
+      </div>
+);
+
 }
 
-
-export default ShowAppointments;
+export default Appointments;

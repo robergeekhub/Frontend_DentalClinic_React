@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, BrowserRouter, useHistory } from 'react-router-dom';
 import axios from 'axios';
-
+import './Profile.scss';
 
 const Profile = () => {
     const userLogin = JSON.parse(localStorage.getItem('user'));
     //const [datosCitas, setCitas] = useState([]);
     const compruebaToken = localStorage.getItem('token');
 
-
     const history = useHistory();
-
 
     const salir = async() => {
         localStorage.clear();
-        await axios.put('http://localhost:8000/api/clients'+ userLogin.email)
+        await axios.put('http://localhost:8000/api/appointments'+ userLogin.email)
         await history.push('/');
     }
-
-    
 	
 	/*useEffect(() => {
 		axios.get('http://localhost:8000/api/clients/', {
@@ -62,21 +58,20 @@ const Profile = () => {
         
         <div className="header">
             <div className="buttons">
-                <Link to onClick={salir}>Salir</Link>
+                <Link to onClick={salir}>Exit</Link>
             </div>
         </div>
 
         <div className="containerButtons">
               <div className="buttonsProfile">
-                <Link to="/profile/newAppointment">Nueva cita</Link>
+                <Link to="/profile/newAppointment">New appointment</Link>
               </div>
               <div className="buttonsProfile">
-                <Link to="/profile/showAppointments">Mostrar citas</Link>
+                <Link to="/profile/showAppointments">Show quotes</Link>
               </div>
         </div>
       </body>
     )
 }
-
 
 export default Profile;

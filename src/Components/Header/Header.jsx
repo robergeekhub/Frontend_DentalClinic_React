@@ -13,7 +13,7 @@ const Header = ({user,setUser}) => {
         
         <header className="header">
             <div class="logo">
-                <img src="dental.png" alt="simbolo de la clinica" width="30%" height="30%" ></img>
+                <img src="dental.png" alt="symbol of the clinic" width="30%" height="30%" ></img>
             </div>
             <Link to="/">Home</Link>
             {user ?

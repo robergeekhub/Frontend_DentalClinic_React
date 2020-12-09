@@ -4,7 +4,6 @@ import axios from 'axios';
 import './Register.scss';
 import 'antd/dist/antd.css';
 
-
 const layout = {
     labelCol: {
         span: 90,
@@ -22,7 +21,7 @@ const tailLayout = {
 const Register = () => {
     const onFinish = (user) => {
         
-        axios.post('http://localhost:8000/api/clients/register', user)
+        axios.post('http://localhost:8000/api/register', user)
             .then(res => {
                 console.log(res.data)
                 notification.success({ message :'registered user',description:'Registered user successfully'})
@@ -45,7 +44,6 @@ const Register = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
-
             <Form.Item
                 label="Name"
                 name="name"
